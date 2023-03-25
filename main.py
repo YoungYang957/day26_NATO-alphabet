@@ -20,13 +20,22 @@ import pandas
 # # Keyword Method with iterrows()
 # # {new_key:new_value for (index, row) in df.iterrows()}
 # #
-#TODO 1. Create a dictionary in this format:
+#Create a dictionary in this format:
 nato_data = pandas.read_csv("nato_phonetic_alphabet.csv")
 new_dic = {row.letter: row.code for (index,row) in nato_data.iterrows()}
 
 
 
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-name = input("SAY YOUR NAME\n").upper()
-name_list = [new_dic[letter] for letter in name]
-print(name_list)
+#Create a list of the phonetic code words from a word that the user inputs.
+def input_name():
+
+    name = input("SAY YOUR NAME\n").upper()
+    try:
+        name_list = [new_dic[letter] for letter in name]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please")
+        input_name()
+    else:
+        print(name_list)
+
+input_name()
